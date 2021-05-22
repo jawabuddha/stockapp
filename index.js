@@ -1,3 +1,5 @@
+// Stock Market App to lookup stock quotes
+
 const express = require('express');
 const app = express();
 const exphbs  = require('express-handlebars');
@@ -18,7 +20,7 @@ const otherstuff = "Welcome to the Stock Application."
 app.get('/', function (req, res) {
     res.render('home', {
     	intro: otherstuff,
-    	content: "This is dynamic content."
+    	content: "You use the Stock Market App to lookup stock quotes."
     });
 });
 
