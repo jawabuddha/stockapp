@@ -20,7 +20,7 @@ const otherstuff = "Welcome to the Stock Application."
 app.get('/', function (req, res) {
     res.render('home', {
     	intro: otherstuff,
-    	content: "You use the Stock Market App to lookup stock quotes."
+    	content: "You can use the Stock Market App to lookup stock quotes."
     });
 });
 
