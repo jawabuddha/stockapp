@@ -5,15 +5,32 @@ const app = express();
 const exphbs  = require('express-handlebars');
 const path = require('path');
 const request = require('request');
+const HandlebarsI18n = require("handlebars-i18n");
 
-var formatter = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD',
-
-  // These options are needed to round to whole numbers if that's what you want.
-  //minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
-  //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
+HandlebarsI18n.init({
+    resources : {
+        "en" : {
+            translation : {
+                "phrase1": "What is good?",
+                "phrase2": "{{what}} is good."
+            }
+        },
+        "de" : {
+            translation: {
+                "phrase1": "Was ist gut?",
+                "phrase2": "{{what}} ist gut."
+           }
+        }
+    },
+    lng : "en",
+    locale: 'en'
 });
+
+HandlebarsI18n.configure([
+    ["en", "PriceFormat", {currency: "USD"}],
+    ["de", "PriceFormat", {currency: "EUR"}]
+]);
+
 
 // USE SERVER PORT OR 5000;
 const PORT = process.env.PORT || 5000;
@@ -37,7 +54,6 @@ app.set('view engine', 'handlebars');
 
 // constants for web page display
 const otherstuff = "Welcome to the Stock Application.";
-var marketCap = formatter.format(2500);
 
 // Set handlebar routes
 app.get('/', function (req, res) {
@@ -45,8 +61,7 @@ app.get('/', function (req, res) {
             res.render('home', {
             stock: doneAPI,
         });
-    }, "fb"), 
-    marketCap;
+    }, "fb")
 
         
 });    

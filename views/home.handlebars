@@ -5,18 +5,18 @@
   <h1 class="display-4">{{stock.companyName}} ({{stock.symbol}})</h1>
   <h2>Market Cap : {{_price stock.marketCap}} </h2>
   <h4>{{stock.latestTime}}</h4>
-   <strong>Previous Close : </strong>{{stock.previousClose}} <br/>
-    <strong>Last Price : </strong>${{stock.latestPrice}} <br/>
-    <strong>Last Price : </strong>${{stock.open}} <br/>
-    <strong>High : </strong>${{stock.high}} <br/>
-    <strong>Low : </strong>${{stock.low}} <br/>
-    <strong>Close : </strong>${{stock.close}} <br/>
-    <strong>Volume : </strong>${{stock.latestVolume}} <br/>
-    <strong>52 Week High : </strong>${{stock.week52High}} <br/>
-    <strong>52 Week Low : </strong>${{stock.week52Low}} <br/>
+   <strong>Previous Close : </strong>{{_price stock.previousClose}} <br/>
+    <strong>Last Price : </strong>{{_price stock.latestPrice}} <br/>
+    <strong>Last Price : </strong>{{_price stock.open}} <br/>
+    <strong>High : </strong>{{_price stock.high}} <br/>
+    <strong>Low : </strong>{{_price stock.low}} <br/>
+    <strong>Close : </strong>{{_price stock.close}} <br/>
+    <strong>Volume : </strong>{{_price stock.latestVolume}} <br/>
+    <strong>52 Week High : </strong>{{_price stock.week52High}} <br/>
+    <strong>52 Week Low : </strong>{{_price stock.week52Low }} <br/>
   <hr class="my-4">
 </div>
 
 <!-- {{#each stock}}
     {{@key}} : {{this}} <br/>
-{{/each}} -->
+{{/each}} --> 
