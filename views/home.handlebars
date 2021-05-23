@@ -1,7 +1,5 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
-{{posted_stuff}}
-
 <div class="bg-light p-5 rounded-lg m-3">
   <h1 class="display-4">{{stock.companyName}} ({{stock.symbol}})</h1>
   <h2>Market Cap : {{_price stock.marketCap}} </h2>
@@ -13,7 +11,7 @@
     <strong>High : </strong>{{_price stock.high}} <br/>
     <strong>Low : </strong>{{_price stock.low}} <br/>
     <strong>Close : </strong>{{_price stock.close}} <br/>
-    <strong>Volume : </strong>{{_price stock.latestVolume}} <br/>
+    <strong>Volume : </strong>{{_num stock.latestVolume}} <br/>
     <strong>52 Week High : </strong>{{_price stock.week52High}} <br/>
     <strong>52 Week Low : </strong>{{_price stock.week52Low }} <br/>
   <hr class="my-4">

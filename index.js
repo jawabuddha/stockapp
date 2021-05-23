@@ -37,8 +37,8 @@ app.use(bodyParser.json());
 
 // API Key pk_217be3b5db4a4cb8bf400fd4ab1348f5
 // create a function to request Stock quotes
-function callAPI(finishedAPI) {
-        request('https://cloud.iexapis.com/stable/stock/aapl/quote?token=pk_217be3b5db4a4cb8bf400fd4ab1348f5',{json: true},(err, res, body) =>{
+function callAPI(finishedAPI, ticker) {
+        request('https://cloud.iexapis.com/stable/stock/'+ticker+'/quote?token=pk_217be3b5db4a4cb8bf400fd4ab1348f5',{json: true},(err, res, body) =>{
             if(err){return console.log(err)};
             if(res.statusCode == 200) {
                 finishedAPI(body);
@@ -64,7 +64,7 @@ app.get('/', function (req, res) {
             res.render('home', {
             stock: doneAPI,
         });
-    }, "aapl")
+    }, "fb")
 
         
 });    
@@ -77,7 +77,7 @@ app.post('/', function (req, res) {
             stock: doneAPI,
 //            posted_stuff : result
         });
-    }, "aapl")
+    }, req.body.stock_ticker)
 
         
 });    
