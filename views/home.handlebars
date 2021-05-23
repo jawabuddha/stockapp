@@ -1,3 +1,22 @@
-    <h1>Stock App: Home</h1>
-    <p> {{ intro}} </p>
-    <p> {{content}} </p>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+
+<div class="bg-light p-5 rounded-lg m-3">
+  <h1 class="display-4">{{stock.companyName}} ({{stock.symbol}})</h1>
+  <h2>Market Cap : {{_price stock.marketCap}} </h2>
+  <h4>{{stock.latestTime}}</h4>
+   <strong>Previous Close : </strong>{{stock.previousClose}} <br/>
+    <strong>Last Price : </strong>${{stock.latestPrice}} <br/>
+    <strong>Last Price : </strong>${{stock.open}} <br/>
+    <strong>High : </strong>${{stock.high}} <br/>
+    <strong>Low : </strong>${{stock.low}} <br/>
+    <strong>Close : </strong>${{stock.close}} <br/>
+    <strong>Volume : </strong>${{stock.latestVolume}} <br/>
+    <strong>52 Week High : </strong>${{stock.week52High}} <br/>
+    <strong>52 Week Low : </strong>${{stock.week52Low}} <br/>
+  <hr class="my-4">
+</div>
+
+<!-- {{#each stock}}
+    {{@key}} : {{this}} <br/>
+{{/each}} -->
