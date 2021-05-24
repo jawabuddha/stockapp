@@ -46,6 +46,16 @@ function callAPI(finishedAPI, ticker) {
         });
 }
 
+function callAPIbatch(finishedAPI, ticker) {
+        request('https://cloud.iexapis.com/stable/stock/'+ticker+'/quote?token=pk_217be3b5db4a4cb8bf400fd4ab1348f5',{json: true},(err, res, body) =>{
+            if(err){return console.log(err)};
+            if(res.statusCode === 200) {
+                console.log(finishedAPI(body));
+                finishedAPI(body);
+            };
+        });
+}
+
 
 
 // set handle bars middleware
@@ -65,10 +75,16 @@ app.get('/', function (req, res) {
             stock: doneAPI,
         });
     }, "fb")
-
-        
 });    
 
+// // Set handlebar index GET routes for batch operation
+// app.get('/', function (req, res) {
+//     callAPIbatch(function(doneAPIbatch) {
+//             res.render('home', {
+//             stock: doneAPIbatch,
+//         });
+//     }, "fb")
+// }); 
 // // Set handlebar index GET routes
 app.post('/', function (req, res) {
     callAPI(function(doneAPI) {
