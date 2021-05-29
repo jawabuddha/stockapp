@@ -5,29 +5,62 @@ const app = express();
 const exphbs  = require('express-handlebars');
 const path = require('path');
 const request = require('request');
-const HandlebarsI18n = require('handlebars-i18n');
+
 const bodyParser = require('body-parser');
 // USE SERVER PORT OR 5000;
 const PORT = process.env.PORT || 5000;
 
-HandlebarsI18n.init({
+const Handlebars = require('handlebars');
+const i18next = require('i18next');
+const HandlebarsI18n = require('handlebars-i18n');
+//const HandlebarsI18n = require('../../dist/handlebars-i18n.js');
+
+// -- The translation phrases for i18next
+i18next.init({
     resources : {
-        "en" : {
-            translation : {
-                "phrase1": "What is good?",
-                "phrase2": "{{what}} is good."
-            }
-        },
-        "de" : {
-            translation: {
-                "phrase1": "Was ist gut?",
-                "phrase2": "{{what}} ist gut."
-           }
+      'en' : {
+        translation : {
+          'key0': 'Change Language to',
+          'key1': 'What is good?',
+          'key2': '{{what}} is good.',
+          'key3WithCount': '{{count}} item',
+          'key3WithCount_plural': '{{count}} items',
+          'key4': 'Selected Language is:'
         }
+      },
+      'de' : {
+        translation: {
+          'key0': 'Sprache wechseln zu',
+          'key1': 'Was ist gut?',
+          'key2': '{{what}} ist gut.',
+          'key3WithCount': '{{count}} Gegenstand',
+          'key3WithCount_plural': '{{count}} Gegenstände',
+          'key4': 'Die ausgewählte Sprache ist:'
+        }
+      }
     },
-    lng : "en",
-    locales:"en"
-});
+    lng : 'en' //specify the language to use as base; used for Price, number, and Date formats
+  });
+
+HandlebarsI18n.init();
+
+HandlebarsI18n.configure([
+  // generic configuration for all languages for number representation:
+  ['all', 'NumberFormat', { minimumFractionDigits: 2 }],
+  // generic configurations per language for price representation:
+  ['en', 'PriceFormat', { currency: 'USD'}],
+  ['de', 'PriceFormat', { currency: 'EUR'}],
+  // generic configurations per language for date representation:
+  ['en', 'DateTimeFormat', { year:'numeric', month:'long', day:'numeric', hour:'numeric', minute:'numeric'}],
+  ['de', 'DateTimeFormat', { year:'numeric', month:'numeric', day:'numeric', hour:'numeric', minute:'numeric', hour12:false}],
+  // configurations per language with custom formats for date:
+  ['en', 'DateTimeFormat', { year:'numeric' }, 'custom-year-only'],
+  ['de', 'DateTimeFormat', { year:'numeric' }, 'custom-year-only'],
+  ['en', 'DateTimeFormat', { year:'numeric', month:'numeric', day:'numeric' }, 'custom-date-short'],
+  ['de', 'DateTimeFormat', { year:'numeric', month:'numeric', day:'numeric' }, 'custom-date-short'],
+  ['en', 'DateTimeFormat', { hour:'numeric', minute:'numeric', second:'numeric', hour12:false}, 'custom-time'],
+  ['de', 'DateTimeFormat', { hour:'numeric', minute:'numeric', second:'numeric', hour12:false}, 'custom-time']
+]);
 
 //use body parser middleware
 //app.use(bodyParser.urlencoded({entended : false})); deprecated -- call separately
@@ -61,9 +94,9 @@ function callAPIbatch(finishedAPI, ticker) {
 // set handle bars middleware
 app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
-app.use(bodyParser.urlencoded({
-  extended: false
-}));
+// app.use(bodyParser.urlencoded({
+//   extended: false
+// }));
 
 // constants for web page display
 const otherstuff = "Welcome to the Stock Application.";
